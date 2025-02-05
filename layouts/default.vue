@@ -4,7 +4,7 @@ const { user } = useUserSession()
 
 <template>
   <TheNavigation :user="user!" />
-  <div class="container">
+  <UContainer class="mt-4">
     <slot />
-  </div>
+  </UContainer>
 </template>
