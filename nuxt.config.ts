@@ -9,5 +9,11 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     'nuxt-auth-utils',
     '@nuxt/test-utils/module'
-  ]
+  ],
+  devServer: {
+    https: {
+      key: './ssl/localhost+2-key.pem',
+      cert: './ssl/localhost+2.pem'
+    }
+  }
 })
