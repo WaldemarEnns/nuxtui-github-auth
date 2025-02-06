@@ -12,13 +12,13 @@ const isDark = computed({
 
 <template>
   <ClientOnly>
-    <UButton
-      :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      color="gray"
-      variant="ghost"
-      aria-label="Theme"
-      @click="isDark = !isDark"
-    />
+    <UToggle
+      color="primary"
+      :model-value="isDark"
+      @update:modelValue="isDark = $event"
+      on-icon="i-heroicons-moon-20-solid"
+      off-icon="i-heroicons-sun-20-solid"
+    ></UToggle>
     <template #fallback>
       <div class="w-8 h-8" />
     </template>
