@@ -25,7 +25,13 @@ const { user } = useUserSession()
     </UForm>
 
     <template #footer>
-      <p class="italic">Your profile is loaded from GitHub, so you can't update your details on this page.</p>
+      <UAlert
+        icon="i-heroicons-information-circle-20-solid"
+        color="blue"
+        variant="soft"
+        title="Using GitHub login"
+        description="Your profile is loaded from GitHub, so you can't update your details on this page."
+      />
       <!-- <UButton
         :to="user.url"
         icon="i-grommet-icons:github"
