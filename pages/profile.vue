@@ -1,7 +1,5 @@
 <script setup lang="ts">
 const { user } = useUserSession()
-
-console.log(user.value)
 </script>
 
 <template>
