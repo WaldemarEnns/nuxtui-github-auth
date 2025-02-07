@@ -21,11 +21,6 @@ function requestNotificationsPermission () {
     }
   })
 }
-
-function sendTestNotification () {
-  console.debug('Sending test notification')
-  new Notification('This is a test notification');
-}
 </script>
 
 <template>
@@ -40,14 +35,5 @@ function sendTestNotification () {
     >
       {{ notificationsPermission ? 'Disable' : 'Enable' }} notifications
     </UToggle>
-
-    <UButton
-      v-if="notificationsPermission"
-      @click="sendTestNotification"
-      color="primary"
-      class="ml-2"
-    >
-      Send test notification
-    </UButton>
   </ClientOnly>
 </template>
