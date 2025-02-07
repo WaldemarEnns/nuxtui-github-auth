@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const toast = useToast()
+
 const notificationsPermission = computed(() => {
   if (!'Notification' in window) {
     console.debug('Notifications are not supported in this browser')
@@ -9,15 +11,22 @@ const notificationsPermission = computed(() => {
 })
 
 function requestNotificationsPermission () {
-  console.debug('Requesting notifications permission')
   if (Notification.permission === 'granted') {
     return;
   }
 
   Notification.requestPermission((permission) => {
-    console.debug('Permission:', permission)
     if (permission === 'granted') {
       new Notification('You have granted permission to receive notifications');
+    } else {
+      toast.add({
+        id: 'notificaitons-denied',
+        title: 'Notifications permission denied',
+        description: 'Notifications could not be enabled. Please enable them in your browser settings.',
+        icon: 'i-grommet-icons:status-warning',
+        timeout: 6000,
+        color: 'red'
+      })
     }
   })
 }
