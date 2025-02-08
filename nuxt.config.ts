@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     'nuxt-auth-utils',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    '@prisma/nuxt'
   ]
 })
