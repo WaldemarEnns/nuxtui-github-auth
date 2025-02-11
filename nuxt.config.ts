@@ -10,20 +10,5 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/test-utils/module',
     '@prisma/nuxt',
-    ['nuxt-mail', {
-      smtp: {
-        host: process.env.MAIL_SMTP_HOST,
-        port: process.env.MAIL_SMTP_PORT,
-        auth: {
-          user: process.env.MAIL_SMTP_USER,
-          pass: process.env.MAIL_SMTP_PASSWORD,
-        },
-        secure: false,
-      },
-      message: {
-        from: process.env.MAIL_FROM_ADDRESS,
-        cc: process.env.MAIL_FROM_ADDRESS,
-      }
-    }],
   ],
 })
