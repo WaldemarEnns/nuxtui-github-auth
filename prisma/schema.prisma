@@ -17,4 +17,6 @@ model User {
   auth_provider         String  @default("github")
   full_name             String
   avatar_url            String?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
 }
