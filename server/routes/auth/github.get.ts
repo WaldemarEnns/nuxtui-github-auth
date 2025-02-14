@@ -52,6 +52,14 @@ export default defineOAuthGitHubEventHandler({
     })
     
     if (isUserNew) {
+      // Create an initial team for the new user
+      const team = await prisma.team.create({
+        data: {
+          owner: { connect: { id: databaseUser.id } },
+          name: `${user.name}'s Team`,
+          users: { connect: { id: databaseUser.id } }
+        }
+      });
       const { sendMail } = useNodeMailer()
       let mjmlTemplate = await fs.readFile('emails/templates/default.mjml', 'utf-8')
       const { html, errors } = mjml2html(mjmlTemplate)
