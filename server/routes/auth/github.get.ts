@@ -52,12 +52,17 @@ export default defineOAuthGitHubEventHandler({
     })
     
     if (isUserNew) {
-      // Create an initial team for the new user
+      // Create an initial team for the new user, and create a TeamMember record assigning them as ADMIN.
       const team = await prisma.team.create({
         data: {
           owner: { connect: { id: databaseUser.id } },
           name: `${user.name}'s Team`,
-          users: { connect: { id: databaseUser.id } }
+          teamMembers: {
+            create: {
+              user: { connect: { id: databaseUser.id } },
+              role: 'ADMIN'  // Assign the user as ADMIN of their own team
+            }
+          }
         }
       });
       const { sendMail } = useNodeMailer()
