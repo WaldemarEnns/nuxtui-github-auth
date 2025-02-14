@@ -10,25 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TeamRole {
+  ADMIN
+  MEMBER
+  // You can add more roles as needed
+}
+
 model User {
-  id                    Int     @id @default(autoincrement())
-  email                 String  @unique
+  id                    Int          @id @default(autoincrement())
+  email                 String       @unique
   auth_provider_user_id Int
-  auth_provider         String  @default("github")
+  auth_provider         String       @default("github")
   full_name             String
   avatar_url            String?
-  created_at            DateTime @default(now())
-  updated_at            DateTime @updatedAt
-  teams                 Team[]   @relation("UserTeams")
-  ownedTeams            Team[]   @relation("TeamOwner")
+  created_at            DateTime     @default(now())
+  updated_at            DateTime     @updatedAt
+  ownedTeams            Team[]       @relation("TeamOwner")
+  teamMembers           TeamMember[]
 }
 
 model Team {
-  id         Int      @id @default(autoincrement())
-  ownerId    Int
-  name       String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  owner      User     @relation("TeamOwner", fields: [ownerId], references: [id])
-  users      User[]   @relation("UserTeams")
+  id          Int          @id @default(autoincrement())
+  ownerId     Int
+  name        String
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  owner       User         @relation("TeamOwner", fields: [ownerId], references: [id])
+  teamMembers TeamMember[]
+}
+
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  teamId    Int
+  userId    Int
+  role      TeamRole @default(MEMBER)
+  joinedAt  DateTime @default(now())
+
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
 }
