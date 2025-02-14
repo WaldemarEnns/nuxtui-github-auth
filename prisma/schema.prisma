@@ -19,4 +19,16 @@ model User {
   avatar_url            String?
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
+  teams                 Team[]   @relation("UserTeams")
+  ownedTeams            Team[]   @relation("TeamOwner")
+}
+
+model Team {
+  id         Int      @id @default(autoincrement())
+  ownerId    Int
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  owner      User     @relation("TeamOwner", fields: [ownerId], references: [id])
+  users      User[]   @relation("UserTeams")
 }
