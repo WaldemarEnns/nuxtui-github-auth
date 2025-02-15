@@ -4,6 +4,7 @@ declare module '#auth-utils' {
     email: string;
     name: string;
     url: string;
+    id: number;
   }
 }
 
