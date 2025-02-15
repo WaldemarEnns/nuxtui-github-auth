@@ -1,6 +1,6 @@
 import { findOrCreateGitHubUser } from '~/services/userService';
 import { createInitialTeam } from '~/services/teamService';
-import { sendWelcomeEmail } from '~/services/emailService';
+import { sendMail } from '~/services/emailService';
 import type { User as GitHubUser } from '#auth-utils';
 
 export default defineOAuthGitHubEventHandler({
@@ -22,7 +22,11 @@ export default defineOAuthGitHubEventHandler({
     
     if (isNewUser) {
       await createInitialTeam(databaseUser);
-      await sendWelcomeEmail(databaseUser.email);
+      try {
+        await sendMail('Welcome! 👋🏼', databaseUser.email);
+      } catch (error) {
+        console.error('Error sending email: ', error)
+      }
     }
 
     return sendRedirect(event, '/')
