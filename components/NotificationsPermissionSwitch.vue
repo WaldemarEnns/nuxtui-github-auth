@@ -3,7 +3,6 @@ const toast = useToast()
 
 const notificationsPermission = computed(() => {
   if (!'Notification' in window) {
-    console.debug('Notifications are not supported in this browser')
     return false
   }
 
