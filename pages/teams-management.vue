@@ -110,6 +110,13 @@ async function removeMember(userId: number) {
         >
           {{ row.role }}
         </UBadge>
+        <UBadge
+          v-if="row.id === userId"
+          class="ml-2"
+          color="primary"
+        >
+          OWNER
+        </UBadge>
       </template>
 
       <template #actions-data="{ row }">
