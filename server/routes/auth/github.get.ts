@@ -25,7 +25,7 @@ export default defineOAuthGitHubEventHandler({
       try {
         await sendMail('Welcome! 👋🏼', databaseUser.email);
       } catch (error) {
-        console.error('Error sending email: ', error)
+        console.error('Error sending welcome email: ', error)
       }
     }
 
