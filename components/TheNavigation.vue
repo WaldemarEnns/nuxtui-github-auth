@@ -23,6 +23,10 @@ const links = computed(() => ([
     label: 'Settings',
     icon: 'i-heroicons-cog',
     to: '/settings'
+  }, {
+    label: 'Teams',
+    icon: 'i-heroicons-users',
+    to: '/teams-management'
   }],
   [{
     label: 'Logout',
