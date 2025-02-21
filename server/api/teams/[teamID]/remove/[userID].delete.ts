@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await ownsTeam(event, user, parseInt(teamID))
+  const ownTeam = await ownsTeam(event, user, parseInt(teamID))
 
   const member = await prisma.teamMember.findFirst({
     where: {
@@ -30,6 +30,13 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 404,
       statusMessage: 'Team member not found'
+    })
+  }
+
+  if (ownTeam && member.userId === user.id) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'You cannot remove yourself from your own team'
     })
   }
 

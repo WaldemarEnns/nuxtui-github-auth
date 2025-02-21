@@ -2,7 +2,7 @@ import type { H3Event, EventHandlerRequest } from 'h3'
 import type { User } from '@prisma/client'
 import prisma from '~/lib/prisma'
 
-export default async function ownsTeam(event: H3Event<EventHandlerRequest>, user: User, teamId: number): Promise<void> {
+export default async function ownsTeam(event: H3Event<EventHandlerRequest>, user: User, teamId: number): Promise<boolean> {
   const team = await prisma.team.findUnique({
     where: {
       id: teamId,
@@ -16,7 +16,7 @@ export default async function ownsTeam(event: H3Event<EventHandlerRequest>, user
       statusMessage: 'Team not found'
     })
   } else {
-    return
+    return true
   }
 }
 
