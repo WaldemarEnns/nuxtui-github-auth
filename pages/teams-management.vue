@@ -4,6 +4,8 @@ import type { TeamRole } from '@prisma/client'
 const user = useUserSession()
 const toast = useToast()
 
+const userId = computed(() => user.user.value?.id)
+
 const { data: teamsData, refresh } = useFetch('/api/teams')
 
 const members = computed(() => {
@@ -112,7 +114,8 @@ async function removeMember(userId: number) {
 
       <template #actions-data="{ row }">
         <UButton
-          color="red"
+          :disabled="row.id === userId"
+          :color="row.id === userId ? 'gray' : 'red'"
           variant="outline"
           icon="i-heroicons-user-minus"
           @click="removeMember(row.id)"
