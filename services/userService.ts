@@ -31,4 +31,16 @@ export async function findOrCreateGitHubUser(user: User): Promise<CreatedUser> {
     });
   }
   return { databaseUser, isNewUser };
-} 
+}
+
+export async function getUser(user: User): Promise<UserModel> {
+  const dbUser: UserModel | null = await prisma.user.findUnique({
+    where: { id: user.id }
+  })
+  
+  if (!dbUser) {
+    throw new Error('User not found.')
+  }
+  
+  return dbUser
+}
