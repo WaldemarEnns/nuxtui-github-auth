@@ -5,8 +5,6 @@ const props = defineProps<{
   user: User
 }>()
 
-console.debug(props.user)
-
 const links = computed(() => ([
   [{
     label: 'Profile',
