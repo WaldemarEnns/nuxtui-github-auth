@@ -20,3 +20,29 @@ export default async function ownsTeam(event: H3Event<EventHandlerRequest>, user
   }
 }
 
+export async function isTeamAdmin(event: H3Event<EventHandlerRequest>, user: User, teamId: number): Promise<boolean> {
+  // First check if user is the owner of the team
+  const isOwner = await ownsTeam(event, user, teamId)
+  if (isOwner) {
+    return true
+  }
+
+  // If not owner, check if user is an admin member
+  const teamMember = await prisma.teamMember.findFirst({
+    where: {
+      userId: user.id,
+      teamId: teamId,
+      role: 'ADMIN'
+    }
+  })
+
+  if (!teamMember) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'You do not have admin permissions for this team'
+    })
+  }
+
+  return true
+}
+
