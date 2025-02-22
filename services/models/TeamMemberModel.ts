@@ -94,7 +94,15 @@ export class TeamMemberModel extends BaseModel<TeamMember> {
     return this.prisma.teamMember.findMany({
       where: { userId },
       include: {
-        team: true
+        team: {
+          include: {
+            teamMembers: {
+              include: {
+                user: true
+              }
+            },
+          }
+        }
       }
     })
   }
