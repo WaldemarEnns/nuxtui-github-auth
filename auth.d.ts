@@ -6,6 +6,10 @@ declare module '#auth-utils' {
     url: string;
     id: number;
   }
+
+  interface Session {
+    pendingInvitation?: string;
+  }
 }
 
 export {}

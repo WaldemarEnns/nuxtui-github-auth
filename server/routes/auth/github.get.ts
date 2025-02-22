@@ -10,6 +10,11 @@ export default defineOAuthGitHubEventHandler({
   async onSuccess(event, { user: githubUser }: { user: GitHubUser }) {
     const { databaseUser, isNewUser } = await findOrCreateGitHubUser(githubUser);
 
+    const session = await getUserSession(event)
+    const pendingInvitation = session.pendingInvitation
+
+    console.log('pendingInvitation', pendingInvitation)
+
     await setUserSession(event, {
       user: {
         avatar_url: databaseUser.avatar_url ?? null,
@@ -38,6 +43,12 @@ export default defineOAuthGitHubEventHandler({
       } catch (error) {
         console.error('Error sending welcome email: ', error)
       }
+    }
+
+    if (pendingInvitation) {
+      console.log('pendingInvitation', pendingInvitation)
+      console.log('redirecting to', `/invite/${pendingInvitation}`)
+      return sendRedirect(event, `/invite/${pendingInvitation}`)
     }
 
     return sendRedirect(event, '/')
