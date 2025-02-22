@@ -14,7 +14,7 @@
     <mj-section padding="40px 0">
       <mj-column>
         <mj-text align="center">
-          <span class="text-gradient">Nuxt SaaS Template</span>  
+          <span class="text-gradient">{{appName}}</span>  
         </mj-text>
         <mj-divider border-width="1px" border-color="#E2E8F0"></mj-divider>
       </mj-column>
@@ -25,19 +25,17 @@
       <mj-column width="80%">
         <mj-text align="center" color="#64748B" font-family="Inter" padding-bottom="30px">
           <h1 style="color: #1E293B; font-size: 28px; margin: 0 0 15px 0">
-            Welcome to <span class="text-gradient">Nuxt SaaS Template</span> 👋
+            {{title}}
           </h1>
-          Get ready to transform your workflow with our powerful platform. Start your journey today!
+          {{content}}
         </mj-text>
 
-        <mj-button background-color="#6366F1" color="#FFFFFF" font-family="Inter" padding="20px 30px" border-radius="8px" href="http://localhost:3000/your-link">
-          Get Started Now
+        <mj-button background-color="#6366F1" color="#FFFFFF" font-family="Inter" padding="20px 30px" border-radius="8px" href="{{actionUrl}}">
+          {{actionText}}
         </mj-button>
-        <mj-text align="center">
-          Alternatively, click this link to get started:
-        </mj-text>
-        <mj-text align="center">
-          <a href="http://localhost:3000/your-link">http://localhost:3000/your-link</a>
+        <mj-text align="center" color="#64748B" font-size="14px" padding-top="15px">
+          Or copy this link to your browser:
+          <a href="{{actionUrl}}" style="color: #6366F1; text-decoration: none">{{actionUrl}}</a>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -45,18 +43,11 @@
     <!-- Footer -->
     <mj-section padding="40px 0 20px">
       <mj-column>
-        <mj-social font-size="15px" padding="0">
-          <mj-social-element name="twitter" href="#" background-color="#6366F1" color="#64748B"></mj-social-element>
-          <mj-social-element name="linkedin" href="#" background-color="#6366F1" color="#64748B"></mj-social-element>
-        </mj-social>
-        
         <mj-text align="center" color="#94A3B8" font-size="13px" padding="20px 0">
-          © 2025 Nuxt SaaS Template. All rights reserved.<br>
-          Address here
+          © 2025 {{appName}}. All rights reserved.
         </mj-text>
         
         <mj-text align="center" font-size="12px" color="#CBD5E1">
-          <a href="#" style="color: #64748B; text-decoration: none">Unsubscribe</a> | 
           <a href="#" style="color: #64748B; text-decoration: none">Privacy Policy</a> | 
           <a href="#" style="color: #64748B; text-decoration: none">Terms of Service</a>
         </mj-text>

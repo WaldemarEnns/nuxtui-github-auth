@@ -23,7 +23,18 @@ export default defineOAuthGitHubEventHandler({
     if (isNewUser) {
       await createInitialTeam(databaseUser);
       try {
-        await sendMail('Welcome! 👋🏼', databaseUser.email);
+        await sendMail(
+          'Welcome! 👋🏼',
+          databaseUser.email,
+          'We are excited to have you on board! Get started by exploring your dashboard and creating your first project.',
+          'default',
+          {
+            appName: process.env.APP_NAME || 'Nuxt SaaS Template',
+            title: `Welcome to ${process.env.APP_NAME || 'Nuxt SaaS Template'} 👋🏼`,
+            actionUrl: process.env.APP_URL || '/',
+            actionText: 'Go to Dashboard'
+          }
+        );
       } catch (error) {
         console.error('Error sending welcome email: ', error)
       }
