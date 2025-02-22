@@ -41,5 +41,8 @@ const links = computed(() => ([
   <UHorizontalNavigation
     :links="links"
     class="border-b border-gray-200 dark:border-gray-800"
+    :ui="{
+      wrapper: 'sticky top-0',
+    }"
   />
 </template>
