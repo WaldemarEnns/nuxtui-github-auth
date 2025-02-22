@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { UserModel } from './UserModel'
 import { TeamModel } from './TeamModel'
 import { TeamMemberModel } from './TeamMemberModel'
+import { TeamInvitationModel } from './TeamInvitationModel'
 
 /**
  * A factory for creating models
@@ -11,6 +12,7 @@ export class ModelFactory {
   private userModel: UserModel | null = null
   private teamModel: TeamModel | null = null
   private teamMemberModel: TeamMemberModel | null = null
+  private teamInvitationModel: TeamInvitationModel | null = null
 
   constructor(prismaClient: PrismaClient) {
     this.prisma = prismaClient
@@ -47,5 +49,16 @@ export class ModelFactory {
       this.teamMemberModel = new TeamMemberModel(this.prisma)
     }
     return this.teamMemberModel
+  }
+
+  /**
+   * Get the team invitation model
+   * @returns The team invitation model
+   */
+  getTeamInvitationModel(): TeamInvitationModel {
+    if (!this.teamInvitationModel) {
+      this.teamInvitationModel = new TeamInvitationModel(this.prisma)
+    }
+    return this.teamInvitationModel
   }
 } 
