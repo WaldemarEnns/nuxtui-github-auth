@@ -155,12 +155,18 @@ async function addMember() {
 
     toast.add({
       id: 'member-added',
+      icon: 'i-heroicons-check-circle',
+      timeout: 3000,
+      color: 'green',
       title: 'Member added successfully',
       description: 'The team member has been added to the team',
     })
   } catch (error) {
     toast.add({
       id: 'member-add-error',
+      icon: 'i-heroicons-exclamation-circle',
+      timeout: 5000,
+      color: 'red',
       title: 'Error adding member',
       description: 'Could not add the team member. Please try again.',
     })
