@@ -87,6 +87,40 @@ async function removeMember(userId: number) {
   }
 }
 
+const email = ref('')
+const role = ref('MEMBER')
+
+const rolesOptions = computed(() => {
+  return ['MEMBER', 'ADMIN']
+})
+
+async function addMember() {
+  try {
+    const { status, data, error } = await useFetch(`/api/teams/${selectedTeam.value}/invite`, {
+      method: 'POST',
+      body: {
+        email: email.value,
+        role: role.value
+      }
+    })
+
+    if (error.value && status.value === 'error') {
+      throw new Error(error.value.message)
+    }
+
+    toast.add({
+      id: 'member-added',
+      title: 'Member added successfully',
+      description: 'The team member has been added to the team',
+    })
+  } catch (error) {
+    toast.add({
+      id: 'member-add-error',
+      title: 'Error adding member',
+      description: 'Could not add the team member. Please try again.',
+    })
+  }
+}
 </script>
 
 <template>
@@ -131,5 +165,27 @@ async function removeMember(userId: number) {
         </UButton>
       </template>
     </UTable>
+  </UCard>
+
+  <UCard>
+    <template #header>
+      <h1>Add member</h1>
+    </template>
+    
+    <UFormGroup
+      label="Email"
+      class="mb-2"
+    >
+      <UInput v-model="email" />
+    </UFormGroup>
+
+    <UFormGroup
+      label="Role"
+      class="mb-2"
+    >
+      <USelect v-model="role" :options="rolesOptions" />
+    </UFormGroup>
+
+    <UButton @click="addMember">Add member</UButton>
   </UCard>
 </template>
