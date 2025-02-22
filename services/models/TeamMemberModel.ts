@@ -90,7 +90,7 @@ export class TeamMemberModel extends BaseModel<TeamMember> {
    * @param userId - The ID of the user to find the members of
    * @returns All team members of the user
    */
-  async findByUserId(userId: number): Promise<TeamMember[]> {
+  async findByUserId(userId: number) {
     return this.prisma.teamMember.findMany({
       where: { userId },
       include: {
