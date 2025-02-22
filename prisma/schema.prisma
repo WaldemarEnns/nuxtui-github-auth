@@ -37,6 +37,7 @@ model Team {
   updated_at  DateTime     @updatedAt
   owner       User         @relation("TeamOwner", fields: [ownerId], references: [id])
   teamMembers TeamMember[]
+  invitations TeamInvitation[]
 }
 
 model TeamMember {
@@ -50,4 +51,21 @@ model TeamMember {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
+}
+
+model TeamInvitation {
+  id         Int      @id @default(autoincrement())
+  teamId     Int
+  email      String
+  token      String   @unique
+  role       TeamRole @default(MEMBER)
+  expiresAt  DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  isUsed     Boolean  @default(false)
+
+  team       Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([email])
 }
