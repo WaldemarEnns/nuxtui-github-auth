@@ -1,9 +1,10 @@
 <mjml>
   <mj-head>
-    <mj-title>SaaS Email Template</mj-title>
+    <mj-title>{{appName}}</mj-title>
     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
     <mj-style>
-      .text-gradient { background: linear-gradient(45deg, #6366F1, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent }
+      .title-container { background: linear-gradient(45deg, #6366F1, #3B82F6); padding: 10px 20px; border-radius: 8px; display: inline-block; }
+      .title-text { color: #FFFFFF; font-family: 'Inter', Arial, sans-serif; font-weight: 600; }
       .cta-shadow { box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.25) }
       .rounded-image { border-radius: 50% }
     </mj-style>
@@ -13,8 +14,10 @@
     <!-- Header Section -->
     <mj-section padding="40px 0">
       <mj-column>
-        <mj-text align="center">
-          <span class="text-gradient">{{appName}}</span>  
+        <mj-text align="center" font-family="Inter, Arial, sans-serif">
+          <div class="title-container">
+            <span class="title-text">{{appName}}</span>
+          </div>
         </mj-text>
         <mj-divider border-width="1px" border-color="#E2E8F0"></mj-divider>
       </mj-column>
@@ -23,17 +26,17 @@
     <!-- Main Content -->
     <mj-section padding="20px 0 40px" css-class="cta-shadow">
       <mj-column width="80%">
-        <mj-text align="center" color="#64748B" font-family="Inter" padding-bottom="30px">
+        <mj-text align="center" color="#4B5563" font-family="Inter, Arial, sans-serif" padding-bottom="30px">
           <h1 style="color: #1E293B; font-size: 28px; margin: 0 0 15px 0">
             {{title}}
           </h1>
           {{content}}
         </mj-text>
 
-        <mj-button background-color="#6366F1" color="#FFFFFF" font-family="Inter" padding="20px 30px" border-radius="8px" href="{{actionUrl}}">
+        <mj-button background-color="#6366F1" color="#FFFFFF" font-family="Inter, Arial, sans-serif" padding="20px 30px" border-radius="8px" href="{{actionUrl}}">
           {{actionText}}
         </mj-button>
-        <mj-text align="center" color="#64748B" font-size="14px" padding-top="15px">
+        <mj-text align="center" color="#4B5563" font-size="14px" font-family="Inter, Arial, sans-serif" padding-top="15px">
           Or copy this link to your browser:
           <a href="{{actionUrl}}" style="color: #6366F1; text-decoration: none">{{actionUrl}}</a>
         </mj-text>
@@ -43,13 +46,13 @@
     <!-- Footer -->
     <mj-section padding="40px 0 20px">
       <mj-column>
-        <mj-text align="center" color="#94A3B8" font-size="13px" padding="20px 0">
+        <mj-text align="center" color="#64748B" font-size="13px" font-family="Inter, Arial, sans-serif" padding="20px 0">
           © 2025 {{appName}}. All rights reserved.
         </mj-text>
         
-        <mj-text align="center" font-size="12px" color="#CBD5E1">
-          <a href="#" style="color: #64748B; text-decoration: none">Privacy Policy</a> | 
-          <a href="#" style="color: #64748B; text-decoration: none">Terms of Service</a>
+        <mj-text align="center" font-size="12px" color="#64748B" font-family="Inter, Arial, sans-serif">
+          <a href="#" style="color: #6366F1; text-decoration: none">Privacy Policy</a> | 
+          <a href="#" style="color: #6366F1; text-decoration: none">Terms of Service</a>
         </mj-text>
       </mj-column>
     </mj-section>
