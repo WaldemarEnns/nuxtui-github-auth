@@ -42,7 +42,7 @@ const links = computed(() => ([
     :links="links"
     class="border-b border-gray-200 dark:border-gray-800"
     :ui="{
-      wrapper: 'sticky top-0',
+      wrapper: 'sticky top-0 z-10 bg-white dark:bg-gray-900',
     }"
   />
 </template>
